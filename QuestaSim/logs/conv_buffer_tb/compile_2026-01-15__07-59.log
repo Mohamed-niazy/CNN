@@ -1,0 +1,90 @@
+# 
+# set TB_V_FILES  [glob -nocomplain $TB_DIR/*.v]
+# set TB_SV_FILES [glob -nocomplain $TB_DIR/*.sv]
+# E:/CNN/HDL/TB/tb.sv
+# 
+# set RTL_V_FILES  [glob -nocomplain $RTL_DIR/*.v]
+# E:/CNN/HDL/RTL/conv_buffer.v E:/CNN/HDL/RTL/trueDualMemReadFirst.v
+# set RTL_SV_FILES [glob -nocomplain $RTL_DIR/*.sv]
+# E:/CNN/HDL/RTL/conv_mat .sv
+# 
+# Compile RTL
+# if {[llength $RTL_V_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$RTL_V_FILES
+# }
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 07:59:02 on Jan 15,2026
+# vlog -reportprogress 300 -sv -work work "+acc" -lint -lint E:/CNN/HDL/RTL/conv_buffer.v E:/CNN/HDL/RTL/trueDualMemReadFirst.v 
+# -- Compiling module conv_buffer
+# -- Compiling module trueDualMemReadFirst
+# 
+# Top level modules:
+# 	conv_buffer
+# End time: 07:59:02 on Jan 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# if {[llength $RTL_SV_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$RTL_SV_FILES
+# }
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 07:59:02 on Jan 15,2026
+# vlog -reportprogress 300 -sv -work work "+acc" -lint -lint E:/CNN/HDL/RTL/conv_mat .sv 
+# -- Compiling module conv_mat
+# 
+# Top level modules:
+# 	conv_mat
+# End time: 07:59:02 on Jan 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# Compile TB
+# if {[llength $TB_V_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$TB_V_FILES
+# }
+# if {[llength $TB_SV_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$TB_SV_FILES
+# }
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 07:59:02 on Jan 15,2026
+# vlog -reportprogress 300 -sv -work work "+acc" -lint -lint E:/CNN/HDL/TB/tb.sv 
+# -- Compiling module conv_buffer_tb
+# ** Warning: E:/CNN/HDL/TB/tb.sv(1): (vlog-2605) empty port name in port list.
+# 
+# Top level modules:
+# 	conv_buffer_tb
+# End time: 07:59:02 on Jan 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# 
+# 
+# Check errors
+# if {[string match "*Error:*" [transcript]]} {
+#     echo "L Compilation failed"
+#     quit -code 1
+# }
+# 
+# Stop logging
+# transcript off
+#  Compilation finished
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading sv_std.std
+# Loading work.conv_buffer_tb(fast)
+# Loading work.conv_buffer(fast)
+# Loading work.trueDualMemReadFirst(fast)
+# TB logs will be saved in: E:/CNN/QuestaSim/logs/conv_buffer_tb/results.txt
+# ** Note: $finish    : E:/CNN/HDL/TB/tb.sv(64)
+#    Time: 835 ns  Iteration: 1  Instance: /conv_buffer_tb
+# 1
+# Break in Module conv_buffer_tb at E:/CNN/HDL/TB/tb.sv line 64
+re
+# ===============================
+#  Compile started
+# ===============================
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# QuestaSim-64 vmap 2021.1 Lib Mapping Utility 2021.01 Jan 19 2021
+# vmap work work 
+# Modifying modelsim.ini
+# ** Error: 捁散獳椠⁳敤楮摥മ
+# 
+#        Unable to replace existing ini file (modelsim.ini).  File can not be renamed.
+# 2026-01-15__08-02
+# E:/CNN/QuestaSim/logs/conv_buffer_tb/compile_2026-01-15__08-02.log

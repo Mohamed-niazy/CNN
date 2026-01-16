@@ -34,12 +34,12 @@ kernels_values
 % K_GAUSSIAN_BLUR_2       = 15;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-usedkernel=1;
+usedkernel=2;
 kernel= kernel_bank(:,:,usedkernel)
 noOfColumn=3;
 noOfRow=3;
 bufferWidth=2500;
-requiredImageWidth=500;
-requiredImageHeight=200;
-imgPath= "D:\mm\PicsArt_12-29-01.39.44.jpg";
+requiredImageWidth=1000;
+requiredImageHeight=1000;
+imgPath= "D:\mm\niazy.jpg";
 grayMode= ~((usedkernel>9 && usedkernel<16)|usedkernel==1) ;

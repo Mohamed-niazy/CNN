@@ -1,0 +1,98 @@
+# 
+# set TB_V_FILES  [glob -nocomplain $TB_DIR/*.v]
+# set TB_SV_FILES [glob -nocomplain $TB_DIR/*.sv]
+# E:/CNN/HDL/TB/tb.sv
+# 
+# set RTL_V_FILES  [glob -nocomplain $RTL_DIR/*.v]
+# E:/CNN/HDL/RTL/conv_buffer.v E:/CNN/HDL/RTL/trueDualMemReadFirst.v
+# set RTL_SV_FILES [glob -nocomplain $RTL_DIR/*.sv]
+# E:/CNN/HDL/RTL/conv_mat .sv
+# 
+# Compile RTL
+# if {[llength $RTL_V_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$RTL_V_FILES
+# }
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 07:04:24 on Jan 15,2026
+# vlog -reportprogress 300 -sv -work work "+acc" -lint -lint E:/CNN/HDL/RTL/conv_buffer.v E:/CNN/HDL/RTL/trueDualMemReadFirst.v 
+# -- Compiling module conv_buffer
+# -- Compiling module trueDualMemReadFirst
+# 
+# Top level modules:
+# 	conv_buffer
+# End time: 07:04:24 on Jan 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# if {[llength $RTL_SV_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$RTL_SV_FILES
+# }
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 07:04:24 on Jan 15,2026
+# vlog -reportprogress 300 -sv -work work "+acc" -lint -lint E:/CNN/HDL/RTL/conv_mat .sv 
+# -- Compiling module conv_mat
+# 
+# Top level modules:
+# 	conv_mat
+# End time: 07:04:24 on Jan 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# Compile TB
+# if {[llength $TB_V_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$TB_V_FILES
+# }
+# if {[llength $TB_SV_FILES]} {
+#     vlog {*}$VLOG_OPTS {*}$TB_SV_FILES
+# }
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 07:04:24 on Jan 15,2026
+# vlog -reportprogress 300 -sv -work work "+acc" -lint -lint E:/CNN/HDL/TB/tb.sv 
+# -- Compiling module conv_buffer_tb
+# ** Warning: E:/CNN/HDL/TB/tb.sv(1): (vlog-2605) empty port name in port list.
+# 
+# Top level modules:
+# 	conv_buffer_tb
+# End time: 07:04:24 on Jan 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# 
+# 
+# Check errors
+# if {[string match "*Error:*" [transcript]]} {
+#     echo "L Compilation failed"
+#     quit -code 1
+# }
+# 
+# Stop logging
+# transcript off
+#  Compilation finished
+# vsim -voptargs="+acc" -t 1ns -wlf E:/CNN/QuestaSim/waves/conv_buffer_tb/wave.wlf "+LOG_DIR=E:/CNN/QuestaSim/logs/conv_buffer_tb" work.conv_buffer_tb 
+# Start time: 06:59:23 on Jan 15,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: E:/CNN/HDL/TB/tb.sv(1): (vopt-2605) empty port name in port list.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Loading sv_std.std
+# Loading work.conv_buffer_tb(fast)
+# Loading work.conv_buffer(fast)
+# Loading work.trueDualMemReadFirst(fast)
+# ** Warning: (vsim-3015) [PCDPC] - Port size (8) does not match connection size (32) for port 'dinb'. The port definition is at: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(23).
+#    Time: 0 ns  Iteration: 0  Instance: /conv_buffer_tb/uut/inst_mem_1 File: E:/CNN/HDL/RTL/conv_buffer.v Line: 72
+# ** Warning: (vsim-3015) [PCDPC] - Port size (8) does not match connection size (32) for port 'dinb'. The port definition is at: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(23).
+#    Time: 0 ns  Iteration: 0  Instance: /conv_buffer_tb/uut/inst_mem_2 File: E:/CNN/HDL/RTL/conv_buffer.v Line: 89
+# ** Error: Cannot open macro file: scripts/run.tcl
+# Error in macro ./../scripts/simulate.tcl line 13
+# Cannot open macro file: scripts/run.tcl
+#     while executing
+# "do scripts/run.tcl"
+do ../scripts/simulate.tcl
+# ===============================
+#  Compile started
+# ===============================
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# QuestaSim-64 vmap 2021.1 Lib Mapping Utility 2021.01 Jan 19 2021
+# vmap work work 
+# Modifying modelsim.ini
+# ** Error: 捁散獳椠⁳敤楮摥മ
+# 
+#        Unable to replace existing ini file (modelsim.ini).  File can not be renamed.
+# E:/CNN/QuestaSim/logs/conv_buffer_tb
+# 2026-01-15__07-08
+# E:/CNN/QuestaSim/logs/conv_buffer_tb/compile_2026-01-15__07-08.log

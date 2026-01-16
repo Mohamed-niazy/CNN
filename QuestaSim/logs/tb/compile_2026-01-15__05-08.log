@@ -1,0 +1,24 @@
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 05:08:35 on Jan 15,2026
+# vlog -sv -work work "+acc" -lint -lint E:/CNN/HDL/RTL/conv_buffer.v E:/CNN/HDL/RTL/trueDualMemReadFirst.v 
+# -- Compiling module conv_buffer
+# -- Compiling module trueDualMemReadFirst
+# ** Warning: E:/CNN/HDL/RTL/conv_buffer.v(33): (vlog-2605) empty port name in port list.
+# ** Error: (vlog-13069) E:/CNN/HDL/RTL/conv_buffer.v(33): near "(": syntax error, unexpected '(', expecting ')'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(49): (vlog-2730) Undefined variable: 'clka'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(50): (vlog-2730) Undefined variable: 'ena'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(51): (vlog-2730) Undefined variable: 'wea'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(51): (vlog-2730) Undefined variable: 'addra'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(51): (vlog-2730) Undefined variable: 'dina'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(56): (vlog-2730) Undefined variable: 'enb'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(57): (vlog-2730) Undefined variable: 'web'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(57): (vlog-2730) Undefined variable: 'addrb'.
+# ** Error: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(57): (vlog-2730) Undefined variable: 'dinb'.
+# ** Warning: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(62): (vlog-2623) Undefined variable: douta.
+# ** Warning: E:/CNN/HDL/RTL/trueDualMemReadFirst.v(63): (vlog-2623) Undefined variable: doutb.
+# End time: 05:08:35 on Jan 15,2026, Elapsed time: 0:00:00
+# Errors: 10, Warnings: 3
+# C:/questasim64_2021.1/win64/vlog failed.
+# ===============================
+#  Compile started
+# ===============================

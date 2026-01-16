@@ -38,6 +38,7 @@ img = imread(imgPath);
 % ---------------------------------------------------------
 % Display original image with its dimensions
 % ---------------------------------------------------------
+figure
 imshow(img)
 title(['Image before resize by ' ...
        int2str(size(img,1)) ' x ' ...

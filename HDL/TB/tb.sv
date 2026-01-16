@@ -32,6 +32,7 @@ module conv_buffer_tb ();
       .valid_out(valid_out)
   );
 
+  int f_handle;
 
   // Testbench initial block
   initial begin
@@ -45,7 +46,6 @@ module conv_buffer_tb ();
 
     $display("TB logs will be saved in: %s", log_dir);
 
-    int f_handle;
     f_handle = $fopen(log_dir, "w");
     // Initialize inputs
     initialize_inputs();
@@ -58,10 +58,10 @@ module conv_buffer_tb ();
     repeat (10) clk_cycle();
 
     // Display output matrix
-    display_output();
+    // display_output();
 
     // Finish simulation
-    $finish;
+    $stop;
   end
 
   // generate system clock 
@@ -124,14 +124,16 @@ module conv_buffer_tb ();
 
   task log_matrix();
     begin
+      // wait(valid_out == 1'b1);
+      // if (valid_out)
       for (int i = 0; i < KERNEL_ROW_SIZE; i = i + 1) begin
         for (int j = 0; j < KERNEL_COLUMN_SIZE; j = j + 1) begin
           $fwrite(f_handle, " %d", out_matrix[DATA_WIDTH*(i*KERNEL_COLUMN_SIZE+j)+:DATA_WIDTH]);
         end
         $fwrite(f_handle, "\n");
-        $fwrite(f_handle, "*********************************************************");
-        $fwrite(f_handle, "\n");
       end
+      $fwrite(f_handle, "*********************************************************");
+      $fwrite(f_handle, "\n");
     end
   endtask
 endmodule
