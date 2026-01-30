@@ -1,9 +1,9 @@
 module conv_mat #(
     parameter IMAGE_WIDTH     = 8,         // Pixel width (e.g., 8-bit grayscale)
-              KERNEL_WIDTH    = 5,         // Kernel coefficient width
-              ADDER_TYPE      = "RIPPLE",  // Adder architecture (for synthesis experiments)
-              MULTIPLIER_TYPE = "ARRAY",   // Multiplier architecture
-              MATRIX_SIZE     = 3          // Convolution window size (3×3)
+    parameter KERNEL_WIDTH    = 5,         // Kernel coefficient width
+    parameter ADDER_TYPE      = "RIPPLE",  // Adder architecture (for synthesis experiments)
+    parameter MULTIPLIER_TYPE = "ARRAY",   // Multiplier architecture
+    parameter MATRIX_SIZE     = 3          // Convolution window size (3×3)
 ) (
     // Flattened 3×3 image window input (each pixel is IMAGE_WIDTH bits)
     input logic [IMAGE_WIDTH * MATRIX_SIZE**2 - 1 : 0] in_matrix,
@@ -15,7 +15,7 @@ module conv_mat #(
     input logic blur_flag,
 
     // 8-bit output pixel after convolution + saturation
-    output logic [IMAGE_WIDTH-1:0] out_matrix
+    output logic [IMAGE_WIDTH-1:0] conv_res
 );
 
   // Width of each multiplication result (pixel × kernel)
@@ -127,7 +127,7 @@ module conv_mat #(
   //    - If value exceeds 8-bit range → output 255
   //    - Else → output lower IMAGE_WIDTH bits
   //--------------------------------------------------------------------
-  assign out_matrix = final_sum[MUL_WIDTH-1] ? 'b0 :  // Negative value → 0
+  assign conv_res = final_sum[MUL_WIDTH-1] ? 'b0 :  // Negative value → 0
       |temp_div[MUL_WIDTH-2:IMAGE_WIDTH] ? 'hff :  // Overflow → clamp to 255
       temp_div[IMAGE_WIDTH-1:0];  // Valid range
 

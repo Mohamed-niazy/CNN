@@ -23,9 +23,11 @@ transcript on
 
 set TB_V_FILES  [glob -nocomplain $TB_DIR/*.v]
 set TB_SV_FILES [glob -nocomplain $TB_DIR/*.sv]
+set TB_SVH_FILES [glob -nocomplain $TB_DIR/*.svh]
 
 set RTL_V_FILES  [glob -nocomplain $RTL_DIR/*.v]
 set RTL_SV_FILES [glob -nocomplain $RTL_DIR/*.sv]
+set RTL_SVH_FILES [glob -nocomplain $RTL_DIR/*.svh]
 
 # Compile RTL
 if {[llength $RTL_V_FILES]} {
@@ -33,6 +35,10 @@ if {[llength $RTL_V_FILES]} {
 }
 if {[llength $RTL_SV_FILES]} {
     vlog {*}$VLOG_OPTS {*}$RTL_SV_FILES
+}
+
+if {[llength $RTL_SVH_FILES]} {
+    vlog {*}$VLOG_OPTS {*}$RTL_SVH_FILES
 }
 
 # Compile TB
@@ -43,6 +49,9 @@ if {[llength $TB_SV_FILES]} {
     vlog {*}$VLOG_OPTS {*}$TB_SV_FILES
 }
 
+if {[llength $TB_SVH_FILES]} {
+    vlog {*}$VLOG_OPTS {*}$TB_SVH_FILES
+}
 
 # Check errors
 if {[string match "*Error:*" [transcript]]} {

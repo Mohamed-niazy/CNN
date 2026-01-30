@@ -44,6 +44,8 @@ module conv_buffer_tb ();
       log_dir = "../text_logs/conv_buffer_output_tb.txt";
     end
 
+    log_dir = $sformatf("%s/sim.log", log_dir);
+
     $display("TB logs will be saved in: %s", log_dir);
 
     f_handle = $fopen(log_dir, "w");

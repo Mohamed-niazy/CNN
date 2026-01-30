@@ -1,9 +1,8 @@
-// Instantiate the conv_buffer module
 module conv_buffer #(
-    DATA_WIDTH         = 8,
-    BUFFER_LENGTH      = 2000,
-    KERNEL_ROW_SIZE    = 3,
-    KERNEL_COLUMN_SIZE = 3
+    parameter DATA_WIDTH         = 8,
+    parameter BUFFER_LENGTH      = 2000,
+    parameter KERNEL_ROW_SIZE    = 3,
+    parameter KERNEL_COLUMN_SIZE = 3
 ) (
     input  wire                                                             clk,
     input  wire                                                             rst_n,
