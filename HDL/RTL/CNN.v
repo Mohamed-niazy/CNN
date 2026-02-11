@@ -14,6 +14,7 @@ module CNN #(
     input  wire                             rst_n,
     input  wire [          PIXEL_WIDTH-1:0] in_point,
     input  wire [$clog2(BUFFER_LENGTH)-1:0] frame_column_size,
+    input  wire [$clog2(BUFFER_LENGTH)-1:0] frame_row_size,
     input  wire                             valid_in,
     input  wire [                      4:0] kernel_type,        //
     output wire [          PIXEL_WIDTH-1:0] conv_res,
@@ -39,6 +40,7 @@ module CNN #(
       .rst_n(rst_n),
       .in_point(in_point),
       .frame_column_size(frame_column_size),
+      .frame_row_size(frame_row_size),
       .valid_in(valid_in),
       .out_matrix(out_matrix),
       .valid_out(valid_out)

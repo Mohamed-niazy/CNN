@@ -8,9 +8,10 @@ module conv_buffer #(
     input  wire                                                             rst_n,
     input  wire [                                           DATA_WIDTH-1:0] in_point,
     input  wire [                                $clog2(BUFFER_LENGTH)-1:0] frame_column_size,
+    input  wire [                                $clog2(BUFFER_LENGTH)-1:0] frame_row_size,
     input  wire                                                             valid_in,
     output reg  [KERNEL_ROW_SIZE*   KERNEL_COLUMN_SIZE   *  DATA_WIDTH-1:0] out_matrix,
-    output reg                                                              valid_out
+    output wire                                                              valid_out
 );
 
   reg [KERNEL_ROW_SIZE*DATA_WIDTH-1:0] buff_1, buff_2, buff_3;
@@ -21,9 +22,9 @@ module conv_buffer #(
   reg [DATA_WIDTH-1:0] temp_1, temp_2;
   reg reg_flag, reg_valid_in;
   wire flag;
-
+  reg  valid_out_last_s_p_reg1,valid_out_last_s_p_reg2,valid_out_main_program;
   assign flag =(cnt_col >= KERNEL_COLUMN_SIZE - 1) && (cnt_row >= KERNEL_COLUMN_SIZE - 1)?  1'b1 : 1'b0;
-
+  assign valid_out = valid_out_main_program | valid_out_last_s_p_reg1 |valid_out_last_s_p_reg2;
   //   assign out_matrix = {buff_3, temp_buff_2, temp_buff_1};
   //   assign out_matrix = (valid_out)?{temp_buff_3, temp_buff_2, temp_buff_1}:
   //                                   { {(KERNEL_ROW_SIZE*DATA_WIDTH){1'b0}} };
@@ -42,7 +43,7 @@ module conv_buffer #(
     if (!rst_n) begin
       out_matrix = {(KERNEL_ROW_SIZE * KERNEL_COLUMN_SIZE * DATA_WIDTH) {1'b0}};
     end else begin
-      if (valid_out) begin
+      if (valid_out_main_program) begin
         if (cnt_col == 1)
           out_matrix = {
             {{DATA_WIDTH{1'b0}}, buff_3[DATA_WIDTH*2-1:0]},
@@ -66,7 +67,7 @@ module conv_buffer #(
       cnt_col <= 0;
       reg_cnt_col <= 0;
       cnt_row <= 0;
-      valid_out <= 0;
+      valid_out_main_program <= 0;
       buff_3 <= {(KERNEL_ROW_SIZE * DATA_WIDTH) {1'b0}};
       buff_2 <= {(KERNEL_ROW_SIZE * DATA_WIDTH) {1'b0}};
       buff_1 <= {(KERNEL_ROW_SIZE * DATA_WIDTH) {1'b0}};
@@ -80,20 +81,24 @@ module conv_buffer #(
         buff_2 <= temp_buff_2;
         buff_1 <= temp_buff_1;
 
-
         if (cnt_col == frame_column_size - 1) begin
           cnt_col <= 0;
-          cnt_row <= cnt_row + 1'b1;
+          if (cnt_row == frame_row_size - 1)  cnt_row <= 'b0;
+          else cnt_row <= cnt_row + 1'b1;
+
         end else cnt_col <= cnt_col + 1'b1;
 
         if ((cnt_col >= KERNEL_COLUMN_SIZE - 1) && (cnt_row >= KERNEL_COLUMN_SIZE - 1)) begin
+          if ((cnt_col == frame_column_size - 1) && (cnt_row == frame_row_size - 1))
+          reg_flag <= 1'b0;
+          else 
           reg_flag <= 1'b1;
         end
         reg_cnt_col <= cnt_col;
 
-        if (flag || reg_flag) valid_out <= 1'b1;
+        if (flag || reg_flag) valid_out_main_program <= 1'b1;
 
-      end
+      end else valid_out_main_program <= 1'b0;
 
     end
     reg_valid_in <= valid_in;
@@ -138,5 +143,22 @@ module conv_buffer #(
       .douta(),  // Port A RAM output data
       .doutb(temp_2)
   );
+
+  always@(posedge clk or negedge rst_n)begin
+if(!rst_n)begin
+valid_out_last_s_p_reg1 <=1'b0;
+valid_out_last_s_p_reg2<= 1'b0;
+
+end
+else begin
+valid_out_last_s_p_reg1 <=(valid_out_main_program |  cnt_row==0|  cnt_col==0);
+valid_out_last_s_p_reg2<= valid_out_last_s_p_reg1;
+
+
+end
+
+end
+
+
 
 endmodule

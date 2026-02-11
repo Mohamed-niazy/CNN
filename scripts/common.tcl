@@ -2,7 +2,7 @@
 # Tops (CHANGE WHEN NEEDED)
 # ===============================
 set RTL_TOP "rtl_top"
-set TB_TOP  "conv_buffer_tb"
+set TB_TOP  "CNN_tb"
 
 # ===============================
 # Project paths
@@ -11,15 +11,14 @@ set PROJ_ROOT "E:/CNN"
 
 set RTL_DIR   "$PROJ_ROOT/HDL/RTL"
 set TB_DIR    "$PROJ_ROOT/HDL/TB"
-set LOG_DIR   "$PROJ_ROOT/QuestaSim/logs"
 set WORK_DIR  "$PROJ_ROOT/QuestaSim/work"
 set WAVE_DIR  "$PROJ_ROOT/QuestaSim/waves"
-set WAVE_DIR  "$PROJ_ROOT/QuestaSim/waves"
-set DATA_DIR  "$PROJ_ROOT/data_txt"
-
-set ENABLE_LINT 1
-
+set LOG_DIR   "$PROJ_ROOT/QuestaSim/logs"
+set TXT_DIR  "$PROJ_ROOT/TxtFiles"
 set TB_LOG_DIR "$LOG_DIR/${TB_TOP}"; # used to logs the simulation results of the current TB
+
+set ENABLE_LINT 0
+
 # Dynamic wave files (per TB top)
 set WAVE_DO  "$WAVE_DIR/${TB_TOP}/wave.do"
 set WLF_FILE "$WAVE_DIR/${TB_TOP}/wave.wlf"
@@ -53,7 +52,7 @@ set VSIM_OPTS {
 # ===============================
 # Create dirs if not exist
 # ===============================
-foreach dir [list $WORK_DIR $WAVE_DIR $LOG_DIR $TB_LOG_DIR $DATA_DIR] {
+foreach dir [list $WORK_DIR $WAVE_DIR $LOG_DIR $TB_LOG_DIR $TXT_DIR] {
     if {![file exists $dir]} {
         file mkdir $dir
     }

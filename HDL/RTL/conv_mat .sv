@@ -19,7 +19,7 @@ module conv_mat #(
 );
 
   // Width of each multiplication result (pixel × kernel)
-  localparam MUL_WIDTH = IMAGE_WIDTH + KERNEL_WIDTH;
+  localparam MUL_WIDTH = IMAGE_WIDTH + KERNEL_WIDTH +1 ; // +1 for sign extension of pixel to handle negative kernel values
 
   // Stores results of 9 multipliers (each MUL_WIDTH bits)
   logic signed [MUL_WIDTH * MATRIX_SIZE**2 - 1 : 0] mul_results;
@@ -128,7 +128,7 @@ module conv_mat #(
   //    - Else → output lower IMAGE_WIDTH bits
   //--------------------------------------------------------------------
   assign conv_res = final_sum[MUL_WIDTH-1] ? 'b0 :  // Negative value → 0
-      |temp_div[MUL_WIDTH-2:IMAGE_WIDTH] ? 'hff :  // Overflow → clamp to 255
+      |temp_div[MUL_WIDTH-2 : IMAGE_WIDTH] ? 'hff :  // Overflow → clamp to 255
       temp_div[IMAGE_WIDTH-1:0];  // Valid range
 
 
