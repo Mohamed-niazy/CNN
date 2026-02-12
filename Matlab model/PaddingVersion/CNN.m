@@ -49,30 +49,31 @@ end
             );
 
             % Perform convolution only when a full 3x3 window is available
-            if  ittrHeight > 2 && ittrWidth > 2
+            if  ittrHeight > 2 && ittrWidth >= 2
                 flag=1;
             end
             if flag
                 if(ittrWidth==1)
-                    newIttrWidth=imgWidth-1;
-                    newIttrHeight=ittrHeight-3;
-                elseif(ittrWidth==2)
                     newIttrWidth=imgWidth;
                     newIttrHeight=ittrHeight-3;
+                elseif(ittrWidth==2)
+                    newIttrWidth=ittrWidth-1;
+                    newIttrHeight=ittrHeight-2;
                 else
-                    newIttrWidth=ittrWidth-2;
+                    newIttrWidth=ittrWidth-1;
                     newIttrHeight=ittrHeight-2;
                 end
 dumpMatrix(fid ,buffer_matrix,newIttrHeight, newIttrWidth, ittrChannel  );
                 convImage(newIttrHeight, newIttrWidth, ittrChannel) = ...
                     conv_matrix(kernel, buffer_matrix);
-                % if(convImage(ittrHeight-2, ittrWidth, ittrChannel)==167)
-                %     x=1;
-                % end
-                % conv_matrix(kernel, buffer_matrix)
             end
         end
     end
+     buffer_matrix = [ buffer_matrix(:,2:3) zeros(3,1)];
+     dumpMatrix(fid ,buffer_matrix,imgHeight, imgWidth, ittrChannel  );
+ convImage(imgHeight, imgWidth, ittrChannel) = ...
+                    conv_matrix(kernel, buffer_matrix);
+
 end
 GenerateFilterResultForRtl(convImage,imgChannel,imgHeight,imgWidth,TxtPath,'PaddingVersionGR');
 fclose(fid);

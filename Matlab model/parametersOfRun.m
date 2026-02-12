@@ -34,7 +34,7 @@ kernels_values
 % K_GAUSSIAN_BLUR_2       = 15;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-usedkernel=1;
+usedkernel=10;
 forcedActivaeGrayMode= 0 ;
 kernel= kernel_bank(:,:,usedkernel);
 noOfColumn=3;

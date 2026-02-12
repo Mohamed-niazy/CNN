@@ -8,6 +8,7 @@ set TB_TOP  "CNN_tb"
 # Project paths
 # ===============================
 set PROJ_ROOT "E:/CNN"
+set ENABLE_LINT 0
 
 set RTL_DIR   "$PROJ_ROOT/HDL/RTL"
 set TB_DIR    "$PROJ_ROOT/HDL/TB"
@@ -17,7 +18,6 @@ set LOG_DIR   "$PROJ_ROOT/QuestaSim/logs"
 set TXT_DIR  "$PROJ_ROOT/TxtFiles"
 set TB_LOG_DIR "$LOG_DIR/${TB_TOP}"; # used to logs the simulation results of the current TB
 
-set ENABLE_LINT 0
 
 # Dynamic wave files (per TB top)
 set WAVE_DO  "$WAVE_DIR/${TB_TOP}/wave.do"

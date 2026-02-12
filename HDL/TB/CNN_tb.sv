@@ -27,7 +27,7 @@ module CNN_tb ();
 
   // Instantiate the CNN for testing
 
-  CNN #(
+  NormalversionCNN #(
       .PIXEL_WIDTH       (PIXEL_WIDTH),         // Pixel width (e.g., 8-bit grayscale)
       .KERNEL_WIDTH      (KERNEL_WIDTH),        // Kernel coefficient width
       .ADDER_TYPE        (ADDER_TYPE),          // Adder architecture (for synthesis experiments)
@@ -98,7 +98,7 @@ module CNN_tb ();
       frame_column_size = 0;
       frame_row_size = 0;
       valid_in = 0;
-      kernel_type = 0;  // Default kernel type (e.g., 0 for identity)
+      kernel_type = 9;  // Default kernel type (e.g., 0 for identity)
 
     end
   endtask
@@ -137,8 +137,6 @@ module CNN_tb ();
           end else begin
             x = $fscanf(fid, "%d\n", input_pixel);
             load_inputs(input_pixel, imgCol,imgRow);  // Load a frame with 5 columns and 25 pixels
-            clk_cycle();
-
           end
         end
 
@@ -240,7 +238,7 @@ module CNN_tb ();
     begin
      forever begin
         if (valid_out) begin
-          $fwrite(fid_log, "%0d row %0d, col %0d  \n", conv_res, inst_CNN.inst_conv_buffer.cnt_row,inst_CNN.inst_conv_buffer.cnt_col);
+          $fwrite(fid_log, "%0d row %0d, col %0d  \n", conv_res, inst_CNN.inst_PaddingVersionconv_buffer.cnt_row,inst_CNN.inst_PaddingVersionconv_buffer.cnt_col);
           clk_cycle();
         end
               #1;  
@@ -266,7 +264,7 @@ module CNN_tb ();
             $fwrite(fid_error_logged, "Error #%d: Expected %d, got %d at time %t\n", cnt_error,
                     expected_value, conv_res, $time);
             $fwrite(fid_error_logged, "row %d, col %d, ch %d\n", row,col,ch);
-            $fwrite(fid_error_logged, "row %d, col %d \n", inst_CNN.inst_conv_buffer.cnt_row,inst_CNN.inst_conv_buffer.cnt_col);
+            $fwrite(fid_error_logged, "row %d, col %d \n", inst_CNN.inst_PaddingVersionconv_buffer.cnt_row,inst_CNN.inst_PaddingVersionconv_buffer.cnt_col);
             log_matrix(fid_error_logged);
           end
           clk_cycle();

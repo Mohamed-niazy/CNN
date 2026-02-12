@@ -4,29 +4,29 @@
 //  Kernel ID Parameters
 //  (Enum-style definitions with description and usage)
 // ---------------------------------------------------------
-parameter K_IDENTITY              = 1;
-parameter K_SOBEL_X               = 2;
-parameter K_SOBEL_Y               = 3;
-parameter K_PREWITT_X             = 4;
-parameter K_PREWITT_Y             = 5;
-parameter K_SCHARR_X              = 6;
-parameter K_SCHARR_Y              = 7;
-parameter K_LAPLACIAN_4           = 8;
-parameter K_LAPLACIAN_8           = 9;
-parameter K_SHARPEN_BASIC         = 10;
-parameter K_SHARPEN_STRONG        = 11;
-parameter K_HIGH_BOOST            = 12;
-parameter K_BOX_BLUR              = 13; // not used 
-parameter K_GAUSSIAN_BLUR_1       = 14;
-parameter K_GAUSSIAN_BLUR_2       = 15;
-parameter K_KIRSCH_N              = 16;
-parameter K_KIRSCH_S              = 17;
-parameter K_KIRSCH_E              = 18;
-parameter K_KIRSCH_W              = 19;
-parameter K_KIRSCH_NE             = 20;
-parameter K_KIRSCH_NW             = 21;
-parameter K_KIRSCH_SE             = 22;
-parameter K_KIRSCH_SW             = 23;
+parameter K_IDENTITY              = 0;
+parameter K_SOBEL_X               = 1;
+parameter K_SOBEL_Y               = 2;
+parameter K_PREWITT_X             = 3;
+parameter K_PREWITT_Y             = 4;
+parameter K_SCHARR_X              = 5;
+parameter K_SCHARR_Y              = 6;
+parameter K_LAPLACIAN_4           = 7;
+parameter K_LAPLACIAN_8           = 8;
+parameter K_SHARPEN_BASIC         = 9;
+parameter K_SHARPEN_STRONG        = 10;
+parameter K_HIGH_BOOST            = 11;
+parameter K_BOX_BLUR              = 12; // not used
+parameter K_GAUSSIAN_BLUR_1       = 13;
+parameter K_GAUSSIAN_BLUR_2       = 14;
+parameter K_KIRSCH_N              = 15;
+parameter K_KIRSCH_S              = 16;
+parameter K_KIRSCH_E              = 17;
+parameter K_KIRSCH_W              = 18;
+parameter K_KIRSCH_NE             = 19;
+parameter K_KIRSCH_NW             = 20;
+parameter K_KIRSCH_SE             = 21;
+parameter K_KIRSCH_SW             = 22;
 // ---------------------------------------------------------
 // Kernel Definitions
 // (Each kernel includes definition and usage comments)
@@ -51,9 +51,9 @@ parameter [3*3*5-1:0] kernel_bank  [23]={
 // Usage: Vertical edge detection
 //  K_SOBEL_X
 {
-     5'sd1,   5'sd0,  -5'sd1,
-     5'sd2,   5'sd0,  -5'sd2,
-     5'sd1,   5'sd0,  -5'sd1
+    -5'sd1, 5'sd0, 5'sd1,
+    -5'sd2, 5'sd0, 5'sd2,
+    -5'sd1, 5'sd0, 5'sd1
 },
 
 
@@ -96,7 +96,7 @@ parameter [3*3*5-1:0] kernel_bank  [23]={
 //  K_SCHARR_X
 {
     5'sd3,   5'sd0,  -5'sd3,
-    5'sd1,   5'sd0,   5'sd0,
+    5'sd10,   5'sd0, -5'sd10,
     5'sd3,   5'sd0,  -5'sd3
 },
 

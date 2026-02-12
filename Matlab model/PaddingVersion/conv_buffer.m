@@ -77,7 +77,7 @@ buff_1 = [buff_1(2:3) temp_2];    % Two rows above
 % Output the 3x3 convolution window
 % Apply zero padding at image boundaries
 % ---------------------------------------------------------
-if cnt_row > 3
+if cnt_row >= 3
     if cnt_col == 1
         % Left edge padding
         buffer_matrix = [ ...
@@ -87,9 +87,9 @@ if cnt_row > 3
     elseif cnt_col == 2
         % Second column padding
         buffer_matrix = [ ...
-            [buff_1(1) 0 0]; ...
-            [buff_2(1) 0 0]; ...
-            [buff_3(1) 0 0] ];
+            [0 buff_1(2:3)]; ...
+            [0 buff_2(2:3)]; ...
+            [0 buff_3(2:3)] ];
     else
         % Fully valid window
         buffer_matrix = [buff_1; buff_2; buff_3];

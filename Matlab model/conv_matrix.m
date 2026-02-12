@@ -28,6 +28,6 @@ function point = conv_matrix(kernel_val, img_matrix)
 
 % Perform element-wise multiplication between kernel and image patch,
 % then sum all values to produce a single convolution output
-point = uint8( sum( sum( kernel_val .* double(img_matrix) ), "all" ) );
+point = uint8(floor(sum( sum( kernel_val .* double(img_matrix) ), "all" )) );
 
 end
